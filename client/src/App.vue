@@ -10,6 +10,7 @@
 import TheSearchbar from "./components/TheSearchbar.vue";
 import TheHeader from "./components/TheHeader.vue";
 import BasePanel from "./components/BasePanel.vue";
+import axios from 'axios';
 export default {
   name: 'app',
   components: {
@@ -19,7 +20,15 @@ export default {
   },
   methods: {
     onSubmit(searchQuery) {
-      
+      axios.post('http://localhost:8001/query', {query: searchQuery})
+      .then(function (response) {
+        // handle success
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      });
     }
   }
 }

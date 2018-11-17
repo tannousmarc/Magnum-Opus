@@ -10,6 +10,7 @@
   "dependencies": {
     "ag-grid-community": "^19.1.2",
     "ag-grid-vue": "^19.1.2",
+    "axios": "^0.18.0",
     "node-sass": "^4.10.0",
     "sass-loader": "^7.1.0",
     "vue": "^2.5.17"
