@@ -1,16 +1,29 @@
 <template>
   <div id = "searchBoxContainer">
-    <input id = "searchBox" autofocus />
-    <button>
-      <i class="icofont-search-1"></i>
-    </button>
+    <form @submit.prevent="handleSubmit">
+      <input id = "searchBox" autofocus v-model="searchValue"/>
+      <button type="submit">
+        <i class="icofont-search-1"></i>
+      </button>
+    </form>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'TheSearchbar'
+  name: 'TheSearchbar',
+  data() {
+    return {
+      searchValue: ''
+    }
+  },
+  methods: {
+    handleSubmit() {
+      this.$emit("submitted", this.searchValue);
+    }
+  }
 }
+
 </script>
 
 <style lang="scss" scoped>

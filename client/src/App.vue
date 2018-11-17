@@ -1,18 +1,26 @@
 <template>
   <div id="app">
     <TheHeader />
-    <TheSearchbar />
+    <TheSearchbar @submitted="onSubmit" />
+    <BasePanel />
   </div>
 </template>
 
 <script>
 import TheSearchbar from "./components/TheSearchbar.vue";
 import TheHeader from "./components/TheHeader.vue";
+import BasePanel from "./components/BasePanel.vue";
 export default {
   name: 'app',
   components: {
     TheHeader,
-    TheSearchbar
+    TheSearchbar,
+    BasePanel
+  },
+  methods: {
+    onSubmit(searchQuery) {
+      
+    }
   }
 }
 </script>
