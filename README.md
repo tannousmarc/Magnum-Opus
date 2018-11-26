@@ -6,18 +6,30 @@ After providing various data sources (SQL, Key/Value stores, CSV, etc.), the use
 # Progress
 
 1.~~Outline project with David before starting any work.~~
+
 2.~~Identify sample data sets for demo/testing.~~
+
 3.~~Mock-up UI.~~
+
 4. ~~Parse questions to queries.~~
+
 5. ~~Link front-end to back-end such that it displays the result of a provided question.~~
-4. Create adaptor for SQL -> SparQL.
-5. Create adaptor for non-relational -> SQL -> SparQL or -> SparQL.
-6. MVP. (Release 1)
-7. Explore how to derive semantics from unstructured data.
-8. Develop algorithm for identifying similar objects.
-9. Develop merging procedure based on newly found structure.
-10. (Release 2)
-11. Provide more data visualization options.
+
+6. Create adaptor for SQL -> SparQL.
+
+7. Create adaptor for non-relational -> SQL -> SparQL or -> SparQL.
+
+8. MVP. (Release 1)
+
+9. Explore how to derive semantics from unstructured data.
+
+10. Develop algorithm for identifying similar objects.
+
+11. Develop merging procedure based on newly found structure.
+
+12. (Release 2)
+
+13. Provide more data visualization options.
 
 
 # Credits
