@@ -43,4 +43,5 @@ After providing various data sources (SQL, Key/Value stores, CSV, etc.), the use
 # Credits
 
 Machinalis for quepy.
+
 https://alexn.org/blog/2012/01/16/cosine-similarity-euclidean-distance.html.
