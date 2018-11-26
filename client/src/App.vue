@@ -2,7 +2,7 @@
   <div id="app">
     <TheHeader />
     <TheSearchbar @submitted="onSubmit" />
-    <BasePanel />
+    <BasePanel :data="result"/>
   </div>
 </template>
 
@@ -18,12 +18,21 @@ export default {
     TheSearchbar,
     BasePanel
   },
+  data:
+  function () {
+        return {
+            result: ""
+        }
+    }
+  ,
   methods: {
     onSubmit(searchQuery) {
-      axios.post('http://localhost:8001/query', {query: searchQuery})
+      let self = this;
+      axios.get('http://localhost:8081/?question=' + searchQuery)
       .then(function (response) {
         // handle success
-        console.log(response.data);
+        console.log(response);
+        self.result = response["data"];
       })
       .catch(function (error) {
         // handle error

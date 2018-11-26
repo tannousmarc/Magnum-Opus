@@ -1,13 +1,14 @@
 <template>
   <div id = "panelContainer">
-      <ag-grid-vue style="width: 100%; height: 100%;"
+      <!--<ag-grid-vue style="width: 100%; height: 100%;"
                   class="ag-theme-balham"
                   :columnDefs="columnDefs"
                   :rowData="rowData"
                   :enableSorting="true"
                   :enableFilter="true"
                   :enableColResize="true">
-      </ag-grid-vue>  
+      </ag-grid-vue>-->
+      <span style="white-space: pre-wrap;">{{data}}</span>
   </div>
 </template>
 
@@ -15,6 +16,7 @@
 import {AgGridVue} from "ag-grid-vue";
 export default {
   name: 'BasePanel',
+  props: ["data"],
    data() {
             return {
                 columnDefs: null,
@@ -89,8 +91,10 @@ export default {
     position: relative;
     font-family: $font-primary;
     height: 60vh;
-    p{
-      padding: 1em 1.5em;
+    overflow-y: scroll;
+    padding: 1em 1.5em;
+    box-sizing: border-box;
+    span{
       font-size: $size-base;
       line-height: 1.75em;
     }

@@ -37,14 +37,18 @@ export default {
     margin: 1em auto;
     position: relative;
     text-align: left;
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
     #searchBox{
       padding: 1em 1em;
+      border-radius: 10px;
       border: none;
       outline: none;
       font-size: $size-medium;
       margin: 0;
       background-color: $transparent;
-      width: calc(100% - 5em);
+      width: calc(100% - 4em);
       font-family: $font-primary;
     }
     button{
