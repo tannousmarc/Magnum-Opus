@@ -11,25 +11,25 @@ After providing various data sources (SQL, Key/Value stores, CSV, etc.), the use
 
 3.~~Mock-up UI.~~
 
-4. ~~Parse questions to queries.~~
+4.~~Parse questions to queries.~~
 
-5. ~~Link front-end to back-end such that it displays the result of a provided question.~~
+5.~~Link front-end to back-end such that it displays the result of a provided question.~~
 
-6. Create adaptor for SQL -> SparQL.
+6.Create adaptor for SQL -> SparQL.
 
-7. Create adaptor for non-relational -> SQL -> SparQL or -> SparQL.
+7.Create adaptor for non-relational -> SQL -> SparQL or -> SparQL.
 
-8. MVP. (Release 1)
+8.MVP. (Release 1)
 
-9. Explore how to derive semantics from unstructured data.
+9.Explore how to derive semantics from unstructured data.
 
-10. Develop algorithm for identifying similar objects.
+10.Develop algorithm for identifying similar objects.
 
-11. Develop merging procedure based on newly found structure.
+11.Develop merging procedure based on newly found structure.
 
-12. (Release 2)
+12.(Release 2)
 
-13. Provide more data visualization options.
+13.Provide more data visualization options.
 
 
 # Credits
