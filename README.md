@@ -15,6 +15,9 @@ After providing various data sources (SQL, Key/Value stores, CSV, etc.), the use
 
 5.~~Link front-end to back-end such that it displays the result of a provided question.~~
 
+5.a)Show originating source of response (name of database?).
+5.b)Show parsed query from question.
+
 6.Create adaptor for SQL -> SparQL.
 
 7.Create adaptor for non-relational -> SQL -> SparQL or -> SparQL.
@@ -30,6 +33,10 @@ After providing various data sources (SQL, Key/Value stores, CSV, etc.), the use
 12.(Release 2)
 
 13.Provide more data visualization options.
+
+14.Add ability to select data sets you're querying from a list of data sets you have access to. (i.e. dbpedia for everyone, organisation-specific sets for employees only)
+
+
 
 
 # Credits
