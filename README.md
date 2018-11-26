@@ -15,8 +15,9 @@ After providing various data sources (SQL, Key/Value stores, CSV, etc.), the use
 
 5.~~Link front-end to back-end such that it displays the result of a provided question.~~
 
-5.a)Show originating source of response (name of database?).
-5.b)Show parsed query from question.
+  5.a)Show originating source of response (name of database?).
+  
+  5.b)Show parsed query from question.
 
 6.Create adaptor for SQL -> SparQL.
 
