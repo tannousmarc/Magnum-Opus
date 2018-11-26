@@ -5,11 +5,11 @@ After providing various data sources (SQL, Key/Value stores, CSV, etc.), the use
 
 # Progress
 
-~~1. Outline project with David before starting any work.
-~~2. Identify sample data sets for demo/testing.~~
-~~3. Mock-up UI.~~
-~~4. Parse questions to queries.~~
-~~5. Link front-end to back-end such that it displays the result of a provided question.~~
+1.~~Outline project with David before starting any work.~~
+2.~~Identify sample data sets for demo/testing.~~
+3.~~Mock-up UI.~~
+4. ~~Parse questions to queries.~~
+5. ~~Link front-end to back-end such that it displays the result of a provided question.~~
 4. Create adaptor for SQL -> SparQL.
 5. Create adaptor for non-relational -> SQL -> SparQL or -> SparQL.
 6. MVP. (Release 1)
