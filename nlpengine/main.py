@@ -159,6 +159,7 @@ def ask(question):
 
     if query is None:
         print "Query not generated :(\n"
+        return "Query could not be parsed."
 
     print query
 

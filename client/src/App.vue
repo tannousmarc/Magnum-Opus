@@ -2,7 +2,8 @@
   <div id="app">
     <TheHeader />
     <TheSearchbar @submitted="onSubmit" />
-    <BasePanel :data="result"/>
+    <BasePanel v-if="quepyResults" :data="quepyResults" type="Dataset"/>
+    <BasePanel v-if="googleResults" :data="googleResults" type="Google"/>
   </div>
 </template>
 
@@ -21,23 +22,23 @@ export default {
   data:
   function () {
         return {
-            result: ""
+            quepyResults: "",
+            googleResults: ""
         }
     }
   ,
   methods: {
-    onSubmit(searchQuery) {
+    async onSubmit(searchQuery) {
       let self = this;
-      axios.get('http://localhost:8081/?question=' + searchQuery)
-      .then(function (response) {
-        // handle success
-        console.log(response);
-        self.result = response["data"];
-      })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-      });
+      try{
+        let response = await axios.get('http://localhost:8081/?question=' + searchQuery);
+        self.quepyResults = response["data"]["quepyResults"];
+        self.googleResults = response["data"]["googleResults"];
+      }
+      catch(e){
+        // eslint-disable-next-line
+        console.log(e);
+      }
     }
   }
 }
@@ -52,5 +53,6 @@ body{
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: all 0.2s ease-in-out;
+  padding-bottom: 2em;
 }
 </style>

@@ -16,7 +16,7 @@ export default {
   @import "../assets/icofont.min.css";
   #headerContainer{
     width: 60%;
-    margin: 5em auto 0;
+    margin: 2em auto 0;
     font-family: $font-primary;
     .name{
         color: $primary500;
