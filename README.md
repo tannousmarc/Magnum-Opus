@@ -6,7 +6,7 @@ Inside the client folder you'll find the frontend. Navigate to that directory an
 
 To launch the frontend after installing the required packages, run:
 
-`npm run start`
+`npm run serve`
 
 Inside the nlpengine folder you'll find the server. Use pip to install any missing dependencies.
 
