@@ -1,3 +1,19 @@
+# Instructions
+
+Inside the client folder you'll find the frontend. Navigate to that directory and run:
+
+`npm install`
+
+To launch the frontend after installing the required packages, run:
+
+`npm run serve`
+
+Inside the nlpengine folder you'll find the server. Use pip to install any missing dependencies. After installing nltk, use `python -m nltk.downloader -d /usr/share/nltk_data PACKAGENAME` if runtime specifies any missing nltk packages.
+
+To launch the server, run:
+
+`python server.py`
+
 # Description
 
 This project should serve as an intermediary layer between users and their data sets.
