@@ -172,11 +172,13 @@ def ask(question):
 
         if not results["results"]["bindings"]:
             print "No answer found :("
-    res = ""
+    res = {}
+    res["results"] = ""
+    res["query"] = query
     for result in results["results"]["bindings"]:
         if result[target]["xml:lang"] == "en":
-            res += result[target]["value"]
-            res += '\n'
+            res["results"] += result[target]["value"]
+            res["results"] += '\n'
     return res
 
 if __name__ == "__main__":

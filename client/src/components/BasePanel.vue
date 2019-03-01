@@ -3,7 +3,7 @@
   <!-- the condition is to determine whether plural is needed. 
   If there is a carriage return inside the result (not at the end) 
   or the result is an array, then there are multiple results. -->
-  <span v-bind:class="classObject"><b>{{type}}</b> result<span v-if="Array.isArray(data) || data.indexOf('\n') !== (data.length - 1)">s</span>
+  <span v-bind:class="classObject"><b>{{type}}</b> result<span v-if="Array.isArray(data) || data.results.indexOf('\n') !== (data.length - 1)">s</span>
   </span>
   <div id = "panelContainer">
       <!--<ag-grid-vue style="width: 100%; height: 100%;"
@@ -15,11 +15,11 @@
                   :enableColResize="true">
       </ag-grid-vue>-->
       <span v-if="type === 'Dataset'" 
-            style="white-space: pre-wrap; display: inline-block; padding-top: 0.5em; padding-bottom: 0.5em;">{{data}}</span>
+            style="white-space: pre-wrap; display: inline-block; padding-top: 0.5em; padding-bottom: 0.5em;">{{data.results}}</span>
       <ul v-else>
         <li v-for="(result, index) in data" :key="`result-${index}`">
-          <h1>{{result.title.split("http")[0]}}</h1>
-          <a v-if="result.link" :href="result.link">{{result.link}}</a>
+          <h1>{{result.title.split(/(http|www)\w+/)[0]}}</h1>
+          <a v-if="result.link" :href="result.link">{{result.link.substring(0, 40)}}(...)</a>
           <p v-if="result.description">{{result.description}}</p>
         </li>
       </ul>
@@ -50,8 +50,16 @@ export default {
       }
     },
     beforeMount() {
-      if(this.data.type === "google"){
+      if(this.type === "Google"){
         this.data.filter(item => item.title.length > 3);
+      }
+      else{
+        // eslint-disable-next-line
+        console.log("SPARQL QUERY");
+        // eslint-disable-next-line
+        console.log("============");
+        // eslint-disable-next-line
+        console.log(this.data.query);
       }
     }
 }
@@ -102,6 +110,7 @@ export default {
         h1{
           margin: 0px;
           padding: 0px;
+          font-size: 1.5em;
         }
         a{
           margin: 0px;
