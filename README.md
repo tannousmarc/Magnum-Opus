@@ -8,7 +8,7 @@ To launch the frontend after installing the required packages, run:
 
 `npm run serve`
 
-Inside the nlpengine folder you'll find the server. Use pip to install any missing dependencies.
+Inside the nlpengine folder you'll find the server. Use pip to install any missing dependencies. After installing nltk, use `python -m nltk.downloader -d /usr/share/nltk_data PACKAGENAME` if runtime specifies any missing nltk packages.
 
 To launch the server, run:
 
