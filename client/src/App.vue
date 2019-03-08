@@ -27,13 +27,16 @@ export default {
         }
     }
   ,
+  /* eslint-disable */
   methods: {
     async onSubmit(searchQuery) {
       let self = this;
       try{
-        let response = await axios.get('http://localhost:8081/?question=' + searchQuery);
-        self.quepyResults = response["data"]["quepyResults"];
-        self.googleResults = response["data"]["googleResults"];
+        let response2 = await axios.get('http://localhost:8080/sparql?query=' + searchQuery);
+        console.log(response2);
+        // let response = await axios.get('http://localhost:8081/?question=' + searchQuery);
+        // self.quepyResults = response["data"]["quepyResults"];
+        // self.googleResults = response["data"]["googleResults"];
       }
       catch(e){
         // eslint-disable-next-line
