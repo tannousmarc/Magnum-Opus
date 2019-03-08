@@ -56,8 +56,10 @@ After providing various data sources (SQL, Key/Value stores, CSV, etc.), the use
 
 
 
-# Credits
+# Acknowledgements
 
 Machinalis for quepy.
+
+FU Berlin, DERI, UCB, JP Morgan Chase, AGFA Healthcare, HP Labs, Johannes Kepler Universität Linz for D2RQ.
 
 https://alexn.org/blog/2012/01/16/cosine-similarity-euclidean-distance.html.
