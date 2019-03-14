@@ -2,7 +2,7 @@
   <div id="app">
     <TheHeader />
     <TheSearchbar @submitted="onSubmit" />
-    <BasePanel v-if="quepyResults" :data="quepyResults" type="Dataset"/>
+    <BasePanel v-if="quepyResults" :data="quepyResults" type="SPARQL"/>
     <BasePanel v-if="googleResults" :data="googleResults" type="Google"/>
   </div>
 </template>
@@ -32,9 +32,14 @@ export default {
     async onSubmit(searchQuery) {
       let self = this;
       try{
-        let response = await axios.get('http://localhost:8081/?question=' + searchQuery);
-        self.quepyResults = response["data"]["quepyResults"];
-        self.googleResults = response["data"]["googleResults"];
+        self.quepyResults = {results: "Loading", query: ""};
+        self.googleResults = [{title: "Loading", description: "Fetching Google Search results..."}]; 
+
+        let responseQuepy = await axios.get('http://localhost:8081/?questionSparql=' + searchQuery);
+        self.quepyResults = responseQuepy["data"]["quepyResults"];
+
+        let responseGoogle = await axios.get('http://localhost:8081/?questionGoogle=' + searchQuery);
+        self.googleResults = responseGoogle["data"]["googleResults"];
       }
       catch(e){
         // eslint-disable-next-line

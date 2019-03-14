@@ -3,8 +3,8 @@
   <!-- the condition is to determine whether plural is needed. 
   If there is a carriage return inside the result (not at the end) 
   or the result is an array, then there are multiple results. -->
-  <span v-bind:class="classObject"><b>{{type}}</b> result<span v-if="Array.isArray(data) || data.results.indexOf('\n') !== (data.length - 1)">s</span>
-  </span>
+  <span v-bind:class="classObject"><b>{{type}}</b> result</span>
+
   <div id = "panelContainer">
       <!--<ag-grid-vue style="width: 100%; height: 100%;"
                   class="ag-theme-balham"
@@ -14,15 +14,26 @@
                   :enableFilter="true"
                   :enableColResize="true">
       </ag-grid-vue>-->
-      <span v-if="type === 'Dataset'" 
-            style="white-space: pre-wrap; display: inline-block; padding-top: 0.5em; padding-bottom: 0.5em;">{{data.results}}</span>
-      <ul v-else>
-        <li v-for="(result, index) in data" :key="`result-${index}`">
-          <h1>{{result.title.split(/(http|www)\w+/)[0]}}</h1>
-          <a v-if="result.link" :href="result.link">{{result.link.substring(0, 40)}}(...)</a>
-          <p v-if="result.description">{{result.description}}</p>
-        </li>
-      </ul>
+      <div v-if="type === 'SPARQL'"> 
+        <div v-if="data.results === 'Loading'" class="spinner">
+          <div class="double-bounce1"></div>
+          <div class="double-bounce2"></div>
+        </div>
+            <span v-else style="white-space: pre-wrap; display: inline-block; padding-top: 0.5em; padding-bottom: 0.5em;">{{data.results}}</span>
+      </div>
+      <div v-else-if="type === 'Google'">
+         <div v-if="data[0].title === 'Loading'" class="spinner">
+          <div class="double-bounce1"></div>
+          <div class="double-bounce2"></div>
+        </div>
+        <ul v-else>
+          <li v-for="(result, index) in data" :key="`result-${index}`">
+            <h1>{{result.title.split(/(http|www)\w+/)[0]}}</h1>
+            <a v-if="result.link" :href="result.link">{{result.link.substring(0, 40)}}(...)</a>
+            <p v-if="result.description">{{result.description}}</p>
+          </li>
+        </ul>
+      </div>
   </div>
 </div>
 </template>
@@ -45,15 +56,15 @@ export default {
         return {
           'resultsSource': true,
           'colorGoogle': this.type === 'Google',
-          'colorDataset': this.type === 'Dataset'
+          'colorDataset': this.type === 'SPARQL'
         }
       }
     },
-    beforeMount() {
+    beforeUpdate() {
       if(this.type === "Google"){
         this.data.filter(item => item.title.length > 3);
       }
-      else{
+      else if(this.data.results !== 'Loading'){
         // eslint-disable-next-line
         console.log("SPARQL QUERY");
         // eslint-disable-next-line
@@ -98,6 +109,7 @@ export default {
     overflow-y: auto;
     padding: 0em 1em;
     box-sizing: border-box;
+    overflow-x: hidden;
     span{
       font-size: $size-base;
       line-height: 1.75em;
@@ -143,5 +155,46 @@ export default {
       border: 2px solid white; /* should match background, can't be transparent */
       background-color: rgba(0, 0, 0, .5);
   }
+  .spinner {
+  width: 40px;
+  height: 40px;
+
+  position: relative;
+  margin: 50px auto;
+}
+
+.double-bounce1, .double-bounce2 {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #333;
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  left: 0;
+  
+  -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+  animation: sk-bounce 2.0s infinite ease-in-out;
+}
+
+.double-bounce2 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+@-webkit-keyframes sk-bounce {
+  0%, 100% { -webkit-transform: scale(0.0) }
+  50% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bounce {
+  0%, 100% { 
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 50% { 
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  }
+}
 
 </style>

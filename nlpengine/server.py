@@ -14,14 +14,13 @@ define("port", default=8081, help="run on the given port", type=int)
 
 class MainHandler(tornado.web.RequestHandler):
     def set_default_headers(self):
-        print "setting headers!!!"
         self.set_header("Access-Control-Allow-Origin", "*")
         self.set_header("Access-Control-Allow-Headers", "x-requested-with")
         self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
     def getQuepy(self):
-        return nlpengine.ask(self.get_argument("question"))
+        return nlpengine.ask(self.get_argument("questionSparql"))
     def getGoogle(self):
-        search_results = google.search(self.get_argument("question"), 2)
+        search_results = google.search(self.get_argument("questionGoogle"), 2)
         returnedObj = []
         for result in search_results:
             obj = {}
@@ -32,8 +31,12 @@ class MainHandler(tornado.web.RequestHandler):
         return returnedObj
     def get(self):
         data = {}
-        data['quepyResults'] = self.getQuepy()  
-        data['googleResults'] = self.getGoogle()
+        if(self.get_arguments("questionGoogle")):
+            data['googleResults'] = self.getGoogle()
+
+        elif(self.get_arguments("questionSparql")):
+            data['quepyResults'] = self.getQuepy()  
+        
         self.write(data)
 
 
