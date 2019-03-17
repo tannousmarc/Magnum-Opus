@@ -6,20 +6,24 @@
   <span v-bind:class="classObject"><b>{{type}}</b> result</span>
 
   <div id = "panelContainer">
-      <!--<ag-grid-vue style="width: 100%; height: 100%;"
-                  class="ag-theme-balham"
-                  :columnDefs="columnDefs"
-                  :rowData="rowData"
-                  :enableSorting="true"
-                  :enableFilter="true"
-                  :enableColResize="true">
-      </ag-grid-vue>-->
+
       <div v-if="type === 'SPARQL'"> 
         <div v-if="data.results === 'Loading'" class="spinner">
           <div class="double-bounce1"></div>
           <div class="double-bounce2"></div>
         </div>
             <span v-else style="white-space: pre-wrap; display: inline-block; padding-top: 0.5em; padding-bottom: 0.5em;">{{data.results}}</span>
+      </div>
+      <div v-else-if="type === 'SQL'">
+         <div v-if="data[0] === 'Loading'" class="spinner">
+          <div class="double-bounce1"></div>
+          <div class="double-bounce2"></div>
+        </div>
+        <ul v-else>
+          <li v-for="(result, index) in data" :key="`result-${index}`">
+            {{result}}
+          </li>
+        </ul>
       </div>
       <div v-else-if="type === 'Google'">
          <div v-if="data[0].title === 'Loading'" class="spinner">
@@ -56,21 +60,14 @@ export default {
         return {
           'resultsSource': true,
           'colorGoogle': this.type === 'Google',
-          'colorDataset': this.type === 'SPARQL'
+          'colorSPARQL': this.type === 'SPARQL',
+          'colorSQL': this.type === 'SQL'
         }
       }
     },
     beforeUpdate() {
       if(this.type === "Google"){
         this.data.filter(item => item.title.length > 3);
-      }
-      else if(this.data.results !== 'Loading'){
-        // eslint-disable-next-line
-        console.log("SPARQL QUERY");
-        // eslint-disable-next-line
-        console.log("============");
-        // eslint-disable-next-line
-        console.log(this.data.query);
       }
     }
 }
@@ -83,8 +80,11 @@ export default {
   .colorGoogle{
     background-color: $sourceGoogle;
   }
-  .colorDataset{
-    background-color: $sourceDataset;
+  .colorSPARQL{
+    background-color: $sourceSPARQL;
+  }
+  .colorSQL{
+    background-color: $sourceSQL;
   }
   .resultsSource{
     margin: 1em 0em 0em 20%;

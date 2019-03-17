@@ -9,7 +9,7 @@ String.prototype.startsWith = function(str) {
 }
 
 function Snorql() {
-    this._endpoint = document.location.href.match(/^([^?]*)snorql\//)[1] + 'sparql';
+    this._endpoint = document.location.href.match(/^([^?]*)snorql\//)[1] + 'sparql'; 
     this._poweredByLink = 'http://d2rq.org/';
     this._poweredByLabel = 'D2R Server';
     this._enableNamedGraphs = false;

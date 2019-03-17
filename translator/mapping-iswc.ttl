@@ -209,6 +209,11 @@ map:persons_Address a d2rq:PropertyBridge;
 	d2rq:property iswc:address;
 	d2rq:column "persons.Address";
 	.
+map:persons_Description a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:Persons;
+	d2rq:property rdfs:comment;
+	d2rq:column "persons.Description";
+	.
 map:persons_Email a d2rq:PropertyBridge;
 	d2rq:belongsToClassMap map:Persons;
 	d2rq:property foaf:mbox;

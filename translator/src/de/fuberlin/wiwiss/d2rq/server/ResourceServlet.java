@@ -22,6 +22,7 @@ public class ResourceServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
+		response.addHeader("Access-Control-Allow-Origin", "*");
 		D2RServer server = D2RServer.fromServletContext(getServletContext());
 		server.checkMappingFileChanged();
 		String relativeResourceURI = request.getRequestURI().substring(
