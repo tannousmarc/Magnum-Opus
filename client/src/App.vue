@@ -40,7 +40,7 @@ export default {
 
         const responseD2rq = await axios.get('http://localhost:2020/sparql?query=' + adjustedQuery);
         console.log(responseD2rq);
-        this.sqlResults = responseD2rq.data.results.bindings.map(el => el.x1.value);
+        this.sqlResults = responseD2rq.data.results.bindings.map(el => el.x1);
     },
     async getGoogle(query){
         const responseGoogle = await axios.get('http://localhost:8081/?questionGoogle=' + query);
@@ -51,7 +51,7 @@ export default {
       try{
         self.quepyResults = {results: "Loading", query: ""};
         self.googleResults = [{title: "Loading", description: "Fetching Google Search results..."}]; 
-        self.sqlResults = ["Loading"]; 
+        self.sqlResults = [{value: "Loading"}]; 
 
         const [quepyReturn, googleReturn] = await Promise.all([
           self.getQuepy(searchQuery),

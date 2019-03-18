@@ -15,15 +15,19 @@
             <span v-else style="white-space: pre-wrap; display: inline-block; padding-top: 0.5em; padding-bottom: 0.5em;">{{data.results}}</span>
       </div>
       <div v-else-if="type === 'SQL'">
-         <div v-if="data[0] === 'Loading'" class="spinner">
+         <div v-if="data[0].value === 'Loading'" class="spinner">
           <div class="double-bounce1"></div>
           <div class="double-bounce2"></div>
         </div>
-        <ul v-else>
-          <li v-for="(result, index) in data" :key="`result-${index}`">
-            {{result}}
-          </li>
-        </ul>
+        <ag-grid-vue v-else style="width: 100%; height: 30vh; padding: 1em 0; background-color: #f8f9fa;"
+                    class="ag-theme-balham"
+                    :columnDefs="columnDefs"
+                    :rowData="data"
+                    :enableSorting="true"
+                    :enableFilter="true"
+                    :onGridReady="onGridReady" 
+                    >
+        </ag-grid-vue>
       </div>
       <div v-else-if="type === 'Google'">
          <div v-if="data[0].title === 'Loading'" class="spinner">
@@ -43,38 +47,51 @@
 </template>
 
 <script>
+import {AgGridVue} from "ag-grid-vue";
 
 export default {
   name: 'BasePanel',
   props: ["data", "type"],
-   data() {
+  data() {
             return {
-
+                columnDefs: null
             }
         },
-    components: {
-      
-    },
-    computed: {
-      classObject: function () {
-        return {
-          'resultsSource': true,
-          'colorGoogle': this.type === 'Google',
-          'colorSPARQL': this.type === 'SPARQL',
-          'colorSQL': this.type === 'SQL'
-        }
-      }
-    },
-    beforeUpdate() {
-      if(this.type === "Google"){
-        this.data.filter(item => item.title.length > 3);
+  components: {
+      AgGridVue
+  },
+  beforeMount() {
+      this.columnDefs = [
+          {headerName: 'Results', field: 'value'}
+      ];
+  },
+  computed: {
+    classObject: function () {
+      return {
+        'resultsSource': true,
+        'colorGoogle': this.type === 'Google',
+        'colorSPARQL': this.type === 'SPARQL',
+        'colorSQL': this.type === 'SQL'
       }
     }
+  },
+  methods: {
+    onGridReady(params){
+      params.api.sizeColumnsToFit();
+    }
+  },
+  beforeUpdate() {
+    if(this.type === "Google"){
+      this.data.filter(item => item.title.length > 3);
+    }
+  }
 }
 
 </script>
 
 <style lang="scss" scoped>
+  @import "../../node_modules/ag-grid-community/dist/styles/ag-grid.css";
+  @import "../../node_modules/ag-grid-community/dist/styles/ag-theme-balham.css";
   @import "../assets/variables.sass";
   @import "../assets/icofont.min.css";
   .colorGoogle{

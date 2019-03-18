@@ -8,13 +8,14 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "ag-grid-community": "^19.1.2",
+    "ag-grid-community": "^19.1.4",
     "ag-grid-vue": "^19.1.2",
     "ajv": "^6.5.5",
     "axios": "^0.18.0",
     "node-sass": "^4.10.0",
     "sass-loader": "^7.1.0",
-    "vue": "^2.5.17"
+    "vue": "^2.5.17",
+    "vue-property-decorator": "^8.0.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.1.1",
