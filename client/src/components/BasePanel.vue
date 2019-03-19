@@ -12,10 +12,11 @@
           <div class="double-bounce1"></div>
           <div class="double-bounce2"></div>
         </div>
-            <span v-else style="white-space: pre-wrap; display: inline-block; padding-top: 0.5em; padding-bottom: 0.5em;">{{data.results}}</span>
+            <span v-else-if="data.results" style="white-space: pre-wrap; display: inline-block; padding-top: 0.5em; padding-bottom: 0.5em;">{{data.results}}</span>
+            <span v-else>No results found.</span>
       </div>
       <div v-else-if="type === 'SQL'">
-         <div v-if="data[0].value === 'Loading'" class="spinner">
+         <div v-if="data.length === 1 && data[0].value === 'Loading'" class="spinner">
           <div class="double-bounce1"></div>
           <div class="double-bounce2"></div>
         </div>

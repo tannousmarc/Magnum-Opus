@@ -35,7 +35,6 @@ export default {
         const responseQuepy = await axios.get('http://localhost:8081/?questionSparql=' + query);
         this.quepyResults = responseQuepy["data"]["quepyResults"];
         console.log(this.quepyResults.query);
-
         const adjustedQuery = encodeURIComponent(this.quepyResults.query) + "&output=json";
 
         const responseD2rq = await axios.get('http://localhost:2020/sparql?query=' + adjustedQuery);
