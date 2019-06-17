@@ -1,0 +1,73 @@
+@prefix map: <file:/Users/richard/D2RQ/workspace/D2RQ/doc/example/mapping-iswc.n3#> .
+@prefix vocab: <vocab/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix d2rq: <http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix iswc: <http://annotation.semanticweb.org/iswc/iswc.daml#> .
+@prefix vcard: <http://www.w3.org/2001/vcard-rdf/3.0#> .
+@prefix jdbc: <http://d2rq.org/terms/jdbc/> .
+
+@prefix dbpedia: <http://dbpedia.org/ontology/> .
+@prefix dbpedia-owl: <http://dbpedia.org/ontology/> .
+
+map:database a d2rq:Database;
+	d2rq:jdbcDriver "com.mysql.jdbc.Driver";
+	d2rq:jdbcDSN "jdbc:mysql:///mydb";
+	d2rq:username "root";
+	jdbc:keepAlive "3600";				# sends noop-query every 3600 seconds
+#	jdbc:keepAliveQuery "SELECT 1";		# optional custom noop-query
+	.
+# Table persons
+map:Persons a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "persons/@@persons.PerID@@";
+	d2rq:class foaf:Person;
+	.
+map:persons_Type a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:Persons;
+	d2rq:property rdf:type;
+	d2rq:uriPattern "http://annotation.semanticweb.org/iswc/iswc.daml#@@persons.Type@@";
+	.
+map:persons_Name a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:Persons;
+	d2rq:property foaf:name;
+    d2rq:property rdfs:label;
+	d2rq:pattern "@@persons.FirstName@@ @@persons.LastName@@";
+	d2rq:lang "en";
+	.
+map:persons_Address a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:Persons;
+	d2rq:property iswc:address;
+	d2rq:column "persons.Address";
+	.
+map:persons_Description a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:Persons;
+	d2rq:property rdfs:comment;
+	d2rq:column "persons.Description";
+	.
+map:persons_Email a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:Persons;
+	d2rq:property foaf:mbox;
+	d2rq:uriPattern "mailto:@@persons.Email@@";
+	.
+map:persons_Homepage a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:Persons;
+	d2rq:property foaf:homepage;
+	d2rq:uriColumn "persons.Homepage";
+	.
+map:persons_Phone a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:Persons;
+	d2rq:property iswc:phone;
+	d2rq:column "persons.Phone";
+	.
+map:persons_Photo a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:Persons;
+	d2rq:property foaf:depiction;
+	d2rq:uriColumn "persons.Photo";
+	.
